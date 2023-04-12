@@ -20,14 +20,12 @@ def azure_classic_three_tier_sql(workload, auto_scale, region):
     prices["Managed_disk"] = get_managed_disk_monthly_price(region, "Standard SSD", "E4 LRS") #E4 32GB
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["App_Gateway"] = get_app_gw_monthly_price(region, "Standard v2", 5)
-    prices["Client_VPN"] = get_vpn_gw_monthly_price(region, 
-                                                    connections=1, 
-                                                    hoursPerDay=8, 
-                                                    workingDays=22) 
+    prices["Client_VPN"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
     # prices["RDS_MySQL"] = get_rds_mysql_monthly_price(region, 
     #                                                        instanceType='db.t3.micro', 
     #                                                        databaseEngine='MySQL',
     #                                                        deploymentOption='Single-AZ')
+    
     return prices, diagram_path
 
 

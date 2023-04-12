@@ -8,7 +8,6 @@ from pricing.aws.get_client_vpn_endpoint_monthly_price import get_client_vpn_end
 
 def aws_classic_three_tier_sql(workload, auto_scale, region):
     prices = {}
-    #print("here")
     
     diagram_path = aws_classic_three_tier_sql_diagram(auto_scale)
     if workload == "Low":
