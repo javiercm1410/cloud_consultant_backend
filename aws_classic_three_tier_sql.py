@@ -5,12 +5,13 @@ from pricing.aws.get_alb_monthly_price import get_alb_monthly_price
 from pricing.aws.get_rds_mysql_monthly_price import get_rds_mysql_monthly_price
 from pricing.aws.get_client_vpn_connection_monthly_price import get_client_vpn_connection_monthly_price
 from pricing.aws.get_client_vpn_endpoint_monthly_price import get_client_vpn_endpoint_monthly_price
+from os_path import get_current_dir
 import json
 
 def aws_classic_three_tier_sql(workload, auto_scale, region):
     prices = {}
     
-    diagram_path = aws_classic_three_tier_sql_diagram(auto_scale)
+    diagram_path = aws_classic_three_tier_sql_diagram(auto_scale, working_dir=get_current_dir().replace("\\", "/"))
     if workload == "Low":
         instance_type = "t2.small"
     elif workload == "Medium":
@@ -38,7 +39,7 @@ def aws_classic_three_tier_sql(workload, auto_scale, region):
         "data": prices,
     }
 
-    return json.dumps(output)
+    return json.dumps(output, ensure_ascii=False)
     # return prices, diagram_path
 
 

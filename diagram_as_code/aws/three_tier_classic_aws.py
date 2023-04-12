@@ -8,10 +8,9 @@ from diagrams.onprem.client import Users
 from diagrams.onprem.network import Internet 
 
 
-def aws_classic_three_tier_sql_diagram(auto_scale):
+def aws_classic_three_tier_sql_diagram(auto_scale, working_dir):
     web_app_name = "AWS Three tier Classic Web Application"
-    root_path = "/Users/simon/codes/"
-    output_path = f"{root_path}/CloudProject/backend/images/"
+    output_path = f"{working_dir}/backend/images/"
     if auto_scale == "Yes":
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
@@ -32,7 +31,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale):
     else:
         web_app_name = web_app_name + " (Without Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
-        with Diagram(web_app_name, show=False):
+        with Diagram(web_app_name, filename, show=False):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("VPC"):
@@ -46,7 +45,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale):
                     with Cluster("Database Tier"):
                         DB = RDS("RDS")
             clients >> internet >> ALBFI >> EC2_Web_Tier >> ALBFP >> EC2_App_Tier >> DB
-    return filename
+    return filename+ ".png"
 
 
-aws_classic_three_tier_sql_diagram("Yes")
+

@@ -35,4 +35,3 @@ def get_ebs_monthly_price(region, volumeType, volumeSize):
     monthly_price *= volumeSize
     return monthly_price
 
-print(get_ebs_monthly_price(region='US East (N. Virginia)', volumeType='gp2', volumeSize=30))

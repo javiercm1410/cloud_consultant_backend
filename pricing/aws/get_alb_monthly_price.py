@@ -31,3 +31,5 @@ def get_alb_monthly_price(region, elbType, usageType):
 
     monthly_price = round(float(hourly_price) * 730, 2)
     return monthly_price
+
+
