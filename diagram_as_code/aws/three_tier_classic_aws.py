@@ -10,8 +10,8 @@ from diagrams.onprem.network import Internet
 
 def aws_classic_three_tier_sql_diagram(auto_scale):
     web_app_name = "AWS Three tier Classic Web Application"
-    root_path = "C://Users//fredd//OneDrive - Pontificia Universidad Católica Madre y Maestra//"
-    output_path = f"{root_path}//cloud-consultant//backend//images//"
+    root_path = "/Users/simon/codes/"
+    output_path = f"{root_path}/CloudProject/backend/images/"
     if auto_scale == "Yes":
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")

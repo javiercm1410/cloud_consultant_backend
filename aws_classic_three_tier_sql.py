@@ -5,6 +5,7 @@ from pricing.aws.get_alb_monthly_price import get_alb_monthly_price
 from pricing.aws.get_rds_mysql_monthly_price import get_rds_mysql_monthly_price
 from pricing.aws.get_client_vpn_connection_monthly_price import get_client_vpn_connection_monthly_price
 from pricing.aws.get_client_vpn_endpoint_monthly_price import get_client_vpn_endpoint_monthly_price
+import json
 
 def aws_classic_three_tier_sql(workload, auto_scale, region):
     prices = {}
@@ -32,9 +33,17 @@ def aws_classic_three_tier_sql(workload, auto_scale, region):
                                                            instanceType='db.t3.micro', 
                                                            databaseEngine='MySQL',
                                                            deploymentOption='Single-AZ')
-    return prices, diagram_path
+
+    output = {
+        "image_path": diagram_path,
+        "data": prices,
+    }
+
+    return json.dumps(output)
+    # return prices, diagram_path
 
 
-prices, diagram_path = aws_classic_three_tier_sql("Medium", "No", "US East (N. Virginia)")
-print(prices)
-print(f"Diagram's path: {diagram_path}")
+
+output = aws_classic_three_tier_sql("Medium", "No", "US East (N. Virginia)")
+print(output)
+# print(f"Diagram's path: {diagram_path}")

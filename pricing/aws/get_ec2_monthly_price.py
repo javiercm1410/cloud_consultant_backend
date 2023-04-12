@@ -3,7 +3,7 @@ import json
 
 
 # Create a Session object that uses the 'admin' profile in the ~/.aws/credentials file
-session = boto3.Session(profile_name='default', region_name='us-east-1')
+session = boto3.Session(profile_name='admin', region_name='us-east-1')
 
 # Create an EC2 client using the session
 ec2_client = session.client('ec2', region_name='us-east-1')

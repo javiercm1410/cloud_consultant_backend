@@ -1,7 +1,7 @@
 import boto3
 import json
 
-session = boto3.Session(profile_name='default', region_name='us-east-1')
+session = boto3.Session(profile_name='admin', region_name='us-east-1')
 
 def get_ebs_monthly_price(region, volumeType, volumeSize):
     pricing_client = session.client('pricing', region_name='us-east-1')
