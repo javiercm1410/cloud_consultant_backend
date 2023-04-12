@@ -3,13 +3,14 @@ from pricing.azure.get_vm_monthly_price import get_vm_monthly_price
 from pricing.azure.get_managed_disk_monthly_price import get_managed_disk_monthly_price
 from pricing.azure.get_app_gw_monthly_price import get_app_gw_monthly_price
 from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
-# from pricing.azure.get_client_vpn_connection_monthly_price import get_client_vpn_connection_monthly_price
-# from pricing.azure.get_client_vpn_endpoint_monthly_price import get_client_vpn_endpoint_monthly_price
+from pricing.azure.get_db_mysql_monthly_price import get_mysql_database_price
+from os_path import get_current_dir
+import json
 
 def azure_classic_three_tier_sql(workload, auto_scale, region):
     prices = {}
     
-    diagram_path = azure_classic_three_tier_sql_diagram(auto_scale)
+    diagram_path = azure_classic_three_tier_sql_diagram(auto_scale, working_dir=get_current_dir().replace("\\", "/"))
     if workload == "Low":
         vm_type = "A1 v2"
     elif workload == "Medium":
@@ -21,14 +22,19 @@ def azure_classic_three_tier_sql(workload, auto_scale, region):
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["App_Gateway"] = get_app_gw_monthly_price(region, "Standard v2", 5)
     prices["Client_VPN"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
-    # prices["RDS_MySQL"] = get_rds_mysql_monthly_price(region, 
-    #                                                        instanceType='db.t3.micro', 
-    #                                                        databaseEngine='MySQL',
-    #                                                        deploymentOption='Single-AZ')
+    prices["Azure_Database_MySQL"] = get_mysql_database_price(region, 
+                                                              deployment_option="Flexible Server", 
+                                                              tier="Burstable", 
+                                                              compute_sku="Basic", 
+                                                              storage=5)
     
-    return prices, diagram_path
+    output = {
+        "image_path": diagram_path,
+        "data": prices,
+    }
+    return json.dumps(output, ensure_ascii=False)
+    # return prices, diagram_path
 
 
-prices, diagram_path = azure_classic_three_tier_sql("Medium", "No", "US East (N. Virginia)")
-print(prices)
-print(diagram_path)
+output = azure_classic_three_tier_sql("Low", "Yes", "eastus")
+print(output)

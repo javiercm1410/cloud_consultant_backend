@@ -13,8 +13,6 @@ def get_managed_disk_monthly_price(region, tier, disk_size):
         return
     
     json_data = json.loads(response.text)
-    with open('prices-managed-disks.json', 'w') as outfile:
-        json.dump(json_data, outfile)
     
     disk_cost_item = json_data["Items"][0]["retailPrice"]
             

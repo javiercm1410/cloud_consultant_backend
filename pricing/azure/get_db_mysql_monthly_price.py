@@ -2,9 +2,9 @@
 import requests
 import json
 
-def get_mysql_database_price(region, performance_tier, vcore):
+def get_mysql_database_price(region, deployment_option, tier, compute_sku, storage):
     api_url = "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview"
-    query = f"armRegionName eq '{region}' and contains(serviceName,'Database')"  #and contains(skuName, '{performance_tier}') and contains(skuName, '{vcore} vCore')"
+    query = f"armRegionName eq '{region}' and contains(serviceName,'Azure Database for MySQL') and contains(productName, '{deployment_option}') and contains(productName, '{tier}') and contains(skuName, '{compute_sku}')"
     response = requests.get(api_url, params={'$filter': query})
     
     if response.status_code != 200:
@@ -12,23 +12,18 @@ def get_mysql_database_price(region, performance_tier, vcore):
         return
     
     json_data = json.loads(response.text)
-    with open('prices-mysql-db.json', 'w') as outfile:
-        json.dump(json_data, outfile)
+    mysql_db_cost_item  = json_data["Items"][0]["retailPrice"]
+
     
-    mysql_db_cost_item = None
-    
-    for item in json_data["Items"]:
-        if "vCore" in item["meterName"]:
-            mysql_db_cost_item = item
-            break
             
     if mysql_db_cost_item:
-        mysql_db_cost = float(mysql_db_cost_item["retailPrice"])
-        total_cost_per_hour = mysql_db_cost
-        total_cost_per_month = total_cost_per_hour * 730
+        storage *= 0.115
+        total_cost_per_month = mysql_db_cost_item * 730 + storage 
         return total_cost_per_month
 
-region = "eastus"
-performance_tier = "General Purpose"  # You can also use "Basic" or "Memory Optimized"
-vcore = 2  # The number of vCores
-print(get_mysql_database_price(region, performance_tier, vcore))
+## region = "eastus"
+# deployment_option = "Flexible Server"
+# tier = "Burstable"  
+# compute_sku = "Basic" 
+# storage = 5
+# print(get_mysql_database_price(region, deployment_option, tier, compute_sku, storage))

@@ -6,10 +6,9 @@ from diagrams.azure.network import VirtualNetworkGateways
 from diagrams.onprem.client import Users    
 from diagrams.onprem.network import Internet
 
-def azure_classic_three_tier_sql_diagram(auto_scale):
+def azure_classic_three_tier_sql_diagram(auto_scale, working_dir):
     web_app_name = "Azure Three-tier Classic Web Application"
-    root_path = "C://Users//fredd//OneDrive - Pontificia Universidad Católica Madre y Maestra//"
-    output_path = f"{root_path}//cloud-consultant//backend//images//"
+    output_path = f"{working_dir}/backend/images/"
     if auto_scale == "Yes":
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
@@ -44,6 +43,4 @@ def azure_classic_three_tier_sql_diagram(auto_scale):
                     with Cluster("Database Tier"):
                         DB = ManagedDatabases("Managed SQL Database")
             clients >> internet >> ALBFI >> VM_Web_Tier >> ALBFP >> VM_App_Tier >> DB
-    return filename
-
-azure_classic_three_tier_sql_diagram("Yes")
+    return filename + ".png"

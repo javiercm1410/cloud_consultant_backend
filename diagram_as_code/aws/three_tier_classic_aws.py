@@ -45,7 +45,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale, working_dir):
                     with Cluster("Database Tier"):
                         DB = RDS("RDS")
             clients >> internet >> ALBFI >> EC2_Web_Tier >> ALBFP >> EC2_App_Tier >> DB
-    return filename+ ".png"
+    return filename + ".png"
 
 
 

@@ -2,7 +2,7 @@
 import requests
 import json
 
-def get_vpn_gateway_price(region, gateway_type):
+def get_vpn_gw_monthly_price(region, gateway_type):
     # try:
     api_url = "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview"
     query = f"armRegionName eq '{region}' and serviceName eq 'VPN Gateway' and contains(skuName, '{gateway_type}') and contains(meterName, '{gateway_type}')"
@@ -13,8 +13,8 @@ def get_vpn_gateway_price(region, gateway_type):
         return
     
     json_data = json.loads(response.text)
-    with open('prices-vpn-gw.json', 'w') as outfile:
-        json.dump(json_data, outfile)
+    # with open('prices-vpn-gw.json', 'w') as outfile:
+    #     json.dump(json_data, outfile)
     
     gateway_cost_item = None
     
@@ -31,6 +31,6 @@ def get_vpn_gateway_price(region, gateway_type):
     
 
 # Ejemplo de uso
-region = "eastus"
-gateway_type = "VpnGw1"
-get_vpn_gateway_price(region, gateway_type)
+# #region = "eastus"
+# gateway_type = "VpnGw1"
+# get_vpn_gw_monthly_price(region, gateway_type)
