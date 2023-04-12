@@ -28,18 +28,7 @@ def get_vpn_gateway_price(region, gateway_type):
         total_cost_per_hour = gateway_cost
         total_cost_per_month = total_cost_per_hour * 730
         return total_cost_per_month
-        # print(f"Precio por hora: ${total_cost_per_hour:.3f}")
-        # print(f"Precio mensual: ${total_cost_per_month:.3f}")
-        
-        # else:
-        #     print("No se encontraron precios para la combinación de región, gateway type y VPN gateway type especificados.")
     
-    # except requests.exceptions.RequestException as e:
-    #     print(f"Error en la solicitud: {e}")
-    # except json.JSONDecodeError as e:
-    #     print(f"Error al decodificar la respuesta JSON: {e}")
-    # except Exception as e:
-    #     print(f"Error inesperado: {e}")
 
 # Ejemplo de uso
 region = "eastus"

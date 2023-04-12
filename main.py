@@ -5,9 +5,8 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
     if cloud_provider_preference == "None":
         if architecture_type == "Classic_Three_Tier" and database_type == "SQL":
             prices_aws, diagram_path_aws = aws_classic_three_tier_sql(workload, auto_scale, region="US East (N. Virginia)")
-            prices_azure, diagram_path_azure = azure_classic_three_tier_sql(workload, auto_scale)
-            return
-            
+            prices_azure, diagram_path_azure = azure_classic_three_tier_sql(workload, auto_scale, region="eastus")
+            return             
             
             
 
