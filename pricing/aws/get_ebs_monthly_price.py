@@ -16,9 +16,6 @@ def get_ebs_monthly_price(region, volumeType, volumeSize):
             #{'Type': 'TERM_MATCH', 'Field': 'productAttributes', 'Value': f'volumeSize:{volumeSize}'} # Volume size filter
         ]
     )
-
-    with open('prices-ebs.json', 'w') as outfile:
-        json.dump(response, outfile)
         
     price_list = response.get('PriceList', [])
     if len(price_list) == 0:
@@ -36,6 +33,6 @@ def get_ebs_monthly_price(region, volumeType, volumeSize):
         break
     monthly_price = float(monthly_price)
     monthly_price *= volumeSize
-    print(f"Monthly price for {volumeType} EBS Volume of size {volumeSize}GB in {region}: {monthly_price}")
+    return monthly_price
 
-get_ebs_monthly_price(region='US East (N. Virginia)', volumeType='gp2', volumeSize=30)
+print(get_ebs_monthly_price(region='US East (N. Virginia)', volumeType='gp2', volumeSize=30))

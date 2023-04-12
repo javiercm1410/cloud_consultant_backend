@@ -25,10 +25,5 @@ def get_rds_mysql_monthly_price(region, instanceType, databaseEngine,deploymentO
         hourly_price = list(hourly_price_dimensions)[0]['pricePerUnit']['USD']
         break
 
-    print(f"Hourly price for RDS {databaseEngine} in {region}: {hourly_price}")
     monthly_price = round(float(hourly_price) * 730, 2)
-    print(f"Monthly price for RDS {databaseEngine} in {region}: {monthly_price}")
-get_rds_mysql_monthly_price(region='US East (N. Virginia)', 
-                            instanceType='db.t3.micro', 
-                            databaseEngine='MySQL', 
-                            deploymentOption='Single-AZ')
+    return monthly_price

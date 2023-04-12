@@ -6,6 +6,7 @@ from diagrams.azure.network import VirtualNetworkGateways
 from diagrams.onprem.client import Users    
 from diagrams.onprem.network import Internet
 
+def azure_classic_three_tier_sql_diagram
 web_app_name = "Azure Three-tier Classic Web Application"
 with Diagram(web_app_name, show=False):
     clients = Users("Clients")

@@ -6,9 +6,8 @@ from diagrams.aws.network import ALB
 from diagrams.aws.network import ClientVpn  
 from diagrams.onprem.client import Users    
 from diagrams.onprem.network import Internet 
-from os_path import get_current_dir
 
-def aws_classic_three_tier_sql_diagram(auto_scale):
+def aws_classic_three_tier_sql_diagram(auto_scale, current_dir):
     web_app_name = "AWS Three tier Classic Web Application"
     if auto_scale == "Yes":
         web_app_name = web_app_name + " (With Auto Scaling)"
@@ -43,7 +42,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale):
                         DB = RDS("RDS")
             clients >> internet >> ALBFI >> EC2_Web_Tier >> ALBFP >> EC2_App_Tier >> DB
     
-    return get_current_dir() + "\\" + web_app_name.lower().replace(" ", "_") + ".png"
+    return current_dir + "\\" + web_app_name.lower().replace(" ", "_") + ".png"
 
 
-print(aws_classic_three_tier_sql_diagram("No"))
+

@@ -6,7 +6,7 @@ import json
 session = boto3.Session(profile_name='default', region_name='us-east-1')
 
 
-def get_vpn_monthly_price(region, connections, hoursPerDay, workingDays):
+def get_client_vpn_connection_monthly_price(region, connections, hoursPerDay, workingDays):
     pricing_client = session.client('pricing', region_name='us-east-1')
     response = pricing_client.get_products(
         ServiceCode='AmazonVPC',
@@ -19,8 +19,6 @@ def get_vpn_monthly_price(region, connections, hoursPerDay, workingDays):
         ]
     )
 
-    
-
     product = response['PriceList'][0]
     vpn_product = json.loads(product)
 
@@ -30,8 +28,6 @@ def get_vpn_monthly_price(region, connections, hoursPerDay, workingDays):
         hourly_price = list(hourly_price_dimensions)[0]['pricePerUnit']['USD']
         break
     
-    print(f"Hourly price for AWS Client VPN in {region}: {hourly_price}")
     monthly_price = round(connections * hoursPerDay * workingDays * float(hourly_price), 2)
-    print(f"Monthly price for AWS Client VPN in {region}: {monthly_price}")
+    return monthly_price
 
-get_vpn_monthly_price('US East (N. Virginia)', 1, 8, 22)

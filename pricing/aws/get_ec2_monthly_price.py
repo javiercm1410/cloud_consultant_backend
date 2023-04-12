@@ -20,13 +20,13 @@ def get_ec2_monthly_price(region, instanceType):
             {'Type': 'TERM_MATCH', 'Field': 'location', 'Value': region}, 
             {'Type': 'TERM_MATCH', 'Field': 'operatingSystem', 'Value': 'Linux'}, 
             {'Type': 'TERM_MATCH', 'Field': 'tenancy', 'Value': 'Shared'}, 
-            {'Type': 'TERM_MATCH', 'Field': 'preInstalledSw','Value': 'NA'}
+            {'Type': 'TERM_MATCH', 'Field': 'preInstalledSw','Value': 'NA'},
+            {'Type': 'TERM_MATCH', 'Field': 'marketoption','Value': 'OnDemand'},
+            {'Type': 'TERM_MATCH', 'Field': 'usagetype','Value': f'BoxUsage:{instanceType}'},
         ]
     )
-
+    
     product = response['PriceList'][0]
-    # with open('prices.json', 'w') as outfile:
-    #     json.dump(response, outfile)
     ec2_product = json.loads(product)
 
     # Get the hourly price for the instance
@@ -35,10 +35,6 @@ def get_ec2_monthly_price(region, instanceType):
         hourly_price_dimensions = term['priceDimensions'].values()
         hourly_price = list(hourly_price_dimensions)[0]['pricePerUnit']['USD']
         break
-
-    print(f"Hourly price for t2.micro in us-east-1: {hourly_price}")
     monthly_price = round(float(hourly_price) * 730, 2)
-    print(f"Monthly price for t2.micro in us-east-1: {monthly_price}")
-    
-    
-get_ec2_monthly_price('US East (N. Virginia)', 't2.micro')
+    return monthly_price
+

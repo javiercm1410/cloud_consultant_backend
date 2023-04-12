@@ -20,8 +20,6 @@ def get_alb_monthly_price(region, elbType, usageType):
     )
 
     product = response['PriceList'][0]
-    with open('prices-alb.json', 'w') as outfile:
-        json.dump(response, outfile)
     alb_product = json.loads(product)
 
     # Get the monthly price for the ALB
@@ -31,8 +29,5 @@ def get_alb_monthly_price(region, elbType, usageType):
         hourly_price = list(hourly_price_dimensions)[0]['pricePerUnit']['USD']
         break
 
-    print(f"Hourly price for {elbType} in {region}: {hourly_price}")
     monthly_price = round(float(hourly_price) * 730, 2)
-    print(f"Monthly price for {elbType} in {region}: {monthly_price}")
-
-get_alb_monthly_price('US East (N. Virginia)', 'LoadBalancing:Application', 'LCUUsage')
+    return monthly_price

@@ -9,7 +9,7 @@ from os_path import get_current_dir
 
 def aws_classic_three_tier_sql(workload, auto_scale, region):
     prices = {}
-    #print("here")
+    print("here")
     current_dir = get_current_dir()
     
     diagram_path = aws_classic_three_tier_sql_diagram(auto_scale, current_dir)
