@@ -1,7 +1,7 @@
 import boto3
 import json
 
-session = boto3.Session(profile_name='default', region_name='us-east-1')
+session = boto3.Session(profile_name='admin', region_name='us-east-1')
 
 def get_rds_mysql_monthly_price(region, instanceType, databaseEngine,deploymentOption):
     pricing_client = session.client('pricing', region_name='us-east-1')

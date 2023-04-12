@@ -3,7 +3,7 @@ import json
 
 
 # Create a Session object that uses the 'default' profile in the ~/.aws/credentials file
-session = boto3.Session(profile_name='default', region_name='us-east-1')
+session = boto3.Session(profile_name='admin', region_name='us-east-1')
 
 def get_alb_monthly_price(region, elbType, usageType):
     # Get the ALB product code
