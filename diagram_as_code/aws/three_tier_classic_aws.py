@@ -7,11 +7,15 @@ from diagrams.aws.network import ClientVpn
 from diagrams.onprem.client import Users    
 from diagrams.onprem.network import Internet 
 
-def aws_classic_three_tier_sql_diagram(auto_scale, current_dir):
+
+def aws_classic_three_tier_sql_diagram(auto_scale):
     web_app_name = "AWS Three tier Classic Web Application"
+    root_path = "C://Users//fredd//OneDrive - Pontificia Universidad Católica Madre y Maestra//"
+    output_path = f"{root_path}//cloud-consultant//backend//images//"
     if auto_scale == "Yes":
         web_app_name = web_app_name + " (With Auto Scaling)"
-        with Diagram(web_app_name, show=False):
+        filename = output_path + web_app_name.lower().replace(" ", "_")
+        with Diagram(web_app_name, filename, show=False):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("VPC"):
@@ -27,6 +31,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale, current_dir):
             clients >> internet >> ALBFI >> EC2_Web_Tier >> ALBFP >> EC2_App_Tier >> DB
     else:
         web_app_name = web_app_name + " (Without Auto Scaling)"
+        filename = output_path + web_app_name.lower().replace(" ", "_")
         with Diagram(web_app_name, show=False):
             clients = Users("Clients")
             internet = Internet("Internet")
@@ -41,8 +46,7 @@ def aws_classic_three_tier_sql_diagram(auto_scale, current_dir):
                     with Cluster("Database Tier"):
                         DB = RDS("RDS")
             clients >> internet >> ALBFI >> EC2_Web_Tier >> ALBFP >> EC2_App_Tier >> DB
-    
-    return current_dir + "\\" + web_app_name.lower().replace(" ", "_") + ".png"
+    return filename
 
 
-
+aws_classic_three_tier_sql_diagram("Yes")
