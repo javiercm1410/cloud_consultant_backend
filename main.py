@@ -21,6 +21,8 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
             output = None
         else:
             output = None
+    else:
+        Output = None
     return output 
 
 print(cloud_design_and_prices("AWS", "High", "Classic-three-tier", True, "SQL", "US_East"))
