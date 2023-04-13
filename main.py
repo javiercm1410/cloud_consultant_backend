@@ -2,7 +2,6 @@ from aws_classic_three_tier_sql import aws_classic_three_tier_sql
 from azure_classic_three_tier_sql import azure_classic_three_tier_sql
 from aws_containter_based_architecture import aws_container_three_tier_sql
 from os_path import get_current_dir
-import json
 
 def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region="US_East"):
     working_dir = get_current_dir()
