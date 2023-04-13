@@ -33,6 +33,6 @@ def get_vm_monthly_price(region, vm_type):
     #     print(f"Error inesperado: {e}")
 
 # Ejemplo de uso
-## region = "eastus"
+# #region = "eastus"
 # vm_type = "D2s v3"
-# get_vm_monthly_price(region, vm_type)
+# print(get_vm_monthly_price(region, vm_type))

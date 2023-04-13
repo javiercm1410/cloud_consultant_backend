@@ -1,6 +1,5 @@
-from diagram_as_code.aws.three_tier_classic_aws import aws_classic_three_tier_sql_diagram
-from pricing.aws.get_ec2_monthly_price import get_ec2_monthly_price
-from pricing.aws.get_ebs_monthly_price import get_ebs_monthly_price
+from diagram_as_code.aws.container_based_architecture_aws import aws_container_based_architecture_diagram
+from pricing.aws.get_fargate_monthly_price import get_fargate_monthly_price
 from pricing.aws.get_alb_monthly_price import get_alb_monthly_price
 from pricing.aws.get_rds_mysql_monthly_price import get_rds_mysql_monthly_price
 from pricing.aws.get_client_vpn_connection_monthly_price import get_client_vpn_connection_monthly_price
@@ -9,18 +8,11 @@ import json
 import base64
 
 
-def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
+def aws_container_three_tier_sql(workload, region, working_dir):
     prices = {}
     
-    diagram_path = aws_classic_three_tier_sql_diagram(auto_scale, working_dir)
-    if workload == "Low":
-        instance_type = "t2.small" # 1 vCPU, 2GB RAM
-    elif workload == "Medium":
-        instance_type = "t2.medium" # 2 vCPU, 4GB RAM
-    else:
-        instance_type = "t2.large" #2 vCPU, 8GB RAM
-    prices["EC2"] = get_ec2_monthly_price(region, instance_type)
-    prices["EBS"] = get_ebs_monthly_price(region, "gp2", 30)
+    diagram_path = aws_container_based_architecture_diagram(working_dir)
+    prices["Fargate"] = get_fargate_monthly_price(region, "Linux", "x86", 10, 10, 2, 4, 50)
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["ALB"] = get_alb_monthly_price(region, "LoadBalancing:Application", "LCUUsage", 0.8) + get_alb_monthly_price(region, "LoadBalancing:Application", "LoadBalancerUsage", None)
     prices["Client_VPN"] = get_client_vpn_connection_monthly_price(region, 
@@ -52,6 +44,6 @@ def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
 
 
 
-# output = aws_classic_three_tier_sql("High", "No", "US East (N. Virginia)")
+# output = aws_container_three_tier_sql("High", "US East (N. Virginia)")
 # print(output)
 # print(f"Diagram's path: {diagram_path}")

@@ -11,7 +11,7 @@ from diagrams.onprem.network import Internet
 def aws_classic_three_tier_sql_diagram(auto_scale, working_dir):
     web_app_name = "AWS Three tier Classic Web Application"
     output_path = f"{working_dir}/backend/images/"
-    if auto_scale == "Yes":
+    if auto_scale is True:
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
         with Diagram(web_app_name, filename, show=False):
