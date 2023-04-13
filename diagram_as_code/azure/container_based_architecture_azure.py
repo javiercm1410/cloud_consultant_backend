@@ -4,7 +4,6 @@ from diagrams.azure.compute import ContainerInstances
 from diagrams.azure.database import ManagedDatabases
 from diagrams.onprem.client import Users    
 from diagrams.onprem.network import Internet 
-import os 
 
 def azure_container_based_architecture_diagram(working_dir):
     web_app_name = "Azure Container Based Architecture"
@@ -27,4 +26,4 @@ def azure_container_based_architecture_diagram(working_dir):
         clients >> internet >> ALBFI >> ACI_group >> DB_group
     return filename + ".png"
 
-print(azure_container_based_architecture_diagram(os.getcwd()))
+# print(azure_container_based_architecture_diagram(os.getcwd()))
