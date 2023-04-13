@@ -30,7 +30,7 @@ def get_app_gw_monthly_price(region, tier, capacity_units):
         total_cost_per_hour = fixed_cost + (capacity_units_cost * capacity_units)
         total_cost_per_month = total_cost_per_hour * 730
         
-        return total_cost_per_month
+        return round(total_cost_per_month, 2)
             
         # else:
         #     print("No se encontraron precios para la combinación de región, tier, tamaño y datos procesados especificados.")

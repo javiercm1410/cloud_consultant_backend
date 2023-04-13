@@ -20,7 +20,7 @@ def get_vm_monthly_price(region, vm_type):
         price_per_hour = float(non_windows_items[0]["retailPrice"])
         price_per_month = price_per_hour * 730
         
-        return price_per_month
+        return round(price_per_month, 2)
 
     #     else:
     #         print("No se encontraron precios para la combinación de región y tipo de VM especificados sin incluir Windows.")

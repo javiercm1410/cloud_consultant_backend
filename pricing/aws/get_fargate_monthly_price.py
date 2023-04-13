@@ -49,13 +49,13 @@
 
 
 def get_fargate_monthly_price(region, operating_system, architecture, pods_number, average_duration_in_mins, vcpu_number, memory_number_in_gb, storage_number_in_gb):
-    pods_number = round(pods_number * (730/24), 2)
-    average_duration_in_hours = round(average_duration_in_mins / 60, 2)
-    cost_vcpu_hourly = round(pods_number * vcpu_number * average_duration_in_hours * 0.04048, 2)
-    cost__memory_gb_hourly = round(pods_number * memory_number_in_gb * average_duration_in_hours * 0.004445, 2)
-    cost_storage_gb_hourly = round(pods_number * (storage_number_in_gb - 20) * average_duration_in_hours * 0.000111, 2)
+    pods_number = pods_number * (730/24)
+    average_duration_in_hours = average_duration_in_mins / 60
+    cost_vcpu_hourly = pods_number * vcpu_number * average_duration_in_hours * 0.04048
+    cost__memory_gb_hourly = pods_number * memory_number_in_gb * average_duration_in_hours * 0.004445
+    cost_storage_gb_hourly = pods_number * (storage_number_in_gb - 20) * average_duration_in_hours * 0.000111
     total_cost =cost_vcpu_hourly + cost__memory_gb_hourly + cost_storage_gb_hourly
-    return total_cost
+    return round(total_cost, 2)
 
 
 # print(get_fargate_monthly_price("US East (N. Virginia)", "Linux", "x86", 10, 10, 2, 4, 50))

@@ -36,7 +36,7 @@ def get_alb_monthly_price(region, elbType, usageType, LCUs):
         monthly_price = round(float(hourly_price) * 730, 2)
     elif usageType == 'LCUUsage':
         monthly_price = round(float(hourly_price)  * LCUs * 730, 2)
-    return monthly_price
+    return round(monthly_price, 2)
 
 
 # print(get_alb_monthly_price(region="US East (N. Virginia)", elbType="LoadBalancing:Application", usageType="LoadBalancerUsage"))

@@ -28,6 +28,6 @@ def get_rds_mysql_monthly_price(region, instanceType, databaseEngine,deploymentO
 
     storage *= 0.115
     monthly_price = round(float(hourly_price) * 730, 2) + storage
-    return monthly_price
+    return round(monthly_price, 2)
 
 # print(get_rds_mysql_monthly_price(region="US East (N. Virginia)", instanceType='db.t3.micro', databaseEngine='MySQL', deploymentOption='Single-AZ', storage=5))

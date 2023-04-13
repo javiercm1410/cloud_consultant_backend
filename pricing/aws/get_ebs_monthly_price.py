@@ -33,5 +33,5 @@ def get_ebs_monthly_price(region, volumeType, volumeSize):
         break
     monthly_price = float(monthly_price)
     monthly_price *= volumeSize
-    return monthly_price
+    return round(monthly_price, 2)
 

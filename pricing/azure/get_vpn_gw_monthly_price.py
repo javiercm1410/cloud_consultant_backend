@@ -27,7 +27,7 @@ def get_vpn_gw_monthly_price(region, gateway_type):
         gateway_cost = float(gateway_cost_item["retailPrice"])
         total_cost_per_hour = gateway_cost
         total_cost_per_month = total_cost_per_hour * 730
-        return total_cost_per_month
+        return round(total_cost_per_month, 2)
     
 
 # Ejemplo de uso

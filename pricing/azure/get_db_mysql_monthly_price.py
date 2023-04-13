@@ -19,7 +19,7 @@ def get_mysql_database_price(region, deployment_option, tier, compute_sku, stora
     if mysql_db_cost_item:
         storage *= 0.115
         total_cost_per_month = mysql_db_cost_item * 730 + storage 
-        return total_cost_per_month
+        return round(total_cost_per_month, 2)
 
 ## region = "eastus"
 # deployment_option = "Flexible Server"

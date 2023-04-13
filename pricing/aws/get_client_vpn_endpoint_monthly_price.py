@@ -30,4 +30,4 @@ def get_client_vpn_endpoint_monthly_price(region, subnetAssociations):
     hourly_price = float(hourly_price)
     hourly_price *= subnetAssociations
     monthly_price = round(float(hourly_price) * 730, 2)
-    return monthly_price
+    return round(monthly_price, 2)

@@ -36,5 +36,5 @@ def get_ec2_monthly_price(region, instanceType):
         hourly_price = list(hourly_price_dimensions)[0]['pricePerUnit']['USD']
         break
     monthly_price = round(float(hourly_price) * 730, 2)
-    return monthly_price
+    return round(monthly_price, 2)
 

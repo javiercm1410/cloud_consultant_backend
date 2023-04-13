@@ -14,11 +14,10 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
             output_azure = azure_classic_three_tier_sql(workload, auto_scale, region_azure, working_dir)
         elif architecture_type == "Container-based" and database_type == "SQL":
             output_aws = aws_container_three_tier_sql(workload, region_aws, working_dir)
-            
+            output_azure = None
     return output_aws, output_azure
 
-print(cloud_design_and_prices("No", "High", "Classic-three-tier", True, "SQL", "US_East"))
-            
+print(cloud_design_and_prices("No", "High", "Container-based", True, "SQL", "US_East"))
             
 
 

@@ -17,7 +17,7 @@ def get_managed_disk_monthly_price(region, tier, disk_size):
     disk_cost_item = json_data["Items"][0]["retailPrice"]
             
     if disk_cost_item:
-        return disk_cost_item
+        return round(disk_cost_item, 2)
         
     # else:
     #     print("No se encontraron precios para la combinación de región, tier y disk size especificados.")

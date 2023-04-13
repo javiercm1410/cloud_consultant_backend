@@ -29,5 +29,5 @@ def get_client_vpn_connection_monthly_price(region, connections, hoursPerDay, wo
         break
     
     monthly_price = round(connections * hoursPerDay * workingDays * float(hourly_price), 2)
-    return monthly_price
+    return round(monthly_price, 2)
 
