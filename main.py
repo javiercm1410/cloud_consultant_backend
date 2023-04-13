@@ -3,6 +3,7 @@ from azure_classic_three_tier_sql import azure_classic_three_tier_sql
 from aws_container_based_architecture import aws_container_three_tier_sql
 from azure_container_based_architecture import azure_container_based_architecture
 from os_path import get_current_dir
+import json 
 
 def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region="US_East"):
     working_dir = get_current_dir()
@@ -13,7 +14,7 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         elif architecture_type == "Container-based" and database_type == "SQL":
             output = aws_container_three_tier_sql(workload, region, working_dir)
         else:
-            output = {"result": "None"}
+            output = json.dumps({"result": "None"})
     elif region == "US_East" and cloud_provider_preference == "Azure":
         region = "eastus"
         if architecture_type == "Classic-three-tier" and database_type == "SQL":
@@ -21,9 +22,9 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         elif architecture_type == "Container-based" and database_type == "SQL":
             output = azure_container_based_architecture(workload, auto_scale, region, working_dir)
         else:
-            output = {"result": "None"}
+            output = json.dumps({"result": "None"})
     else:
-        output = {"result": "None"}
+        output = json.dumps({"result": "None"})
     return output
 if __name__ == "__main__":
     import sys
