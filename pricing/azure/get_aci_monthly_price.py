@@ -12,8 +12,8 @@ def get_aci_monthly_price(region, pods_number, average_duration_in_hours, vcpu_n
         return
     
     json_data = json.loads(response.text)
-    with open('prices-aci.json', 'w') as outfile:
-       json.dump(json_data, outfile)
+    # with open('prices-aci.json', 'w') as outfile:
+    #    json.dump(json_data, outfile)
     
     # aci_cost_item = None
     
@@ -32,7 +32,7 @@ def get_aci_monthly_price(region, pods_number, average_duration_in_hours, vcpu_n
     
     return aci_total_cost
 
-## region = "eastus"
+# #region = "eastus"
 # pods_number = 6
 # average_duration_in_hours = 1
 # vcpu_number = 3

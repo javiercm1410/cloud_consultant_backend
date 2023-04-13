@@ -9,10 +9,26 @@ import base64
 
 
 def aws_container_three_tier_sql(workload, region, working_dir):
+# def get_fargate_monthly_price(region, operating_system, architecture, pods_number, average_duration_in_mins, vcpu_number, memory_number_in_gb, storage_number_in_gb):
+
     prices = {}
-    
+    if workload == "Low":
+         pods_number = 1
+         average_duration_in_mins = 3000
+         vcpu_number = 1
+         memory_number_in_gb = 2
+    elif workload == "Medium":
+         pods_number = 2
+         average_duration_in_hours = 3000
+         vcpu_number = 2
+         memory_number_in_gb = 4
+    else:
+         pods_number = 4
+         average_duration_in_hours = 3000
+         vcpu_number = 2
+         memory_number_in_gb = 8
     diagram_path = aws_container_based_architecture_diagram(working_dir)
-    prices["Fargate"] = get_fargate_monthly_price(region, "Linux", "x86", 10, 10, 2, 4, 50)
+    prices["Fargate"] = get_fargate_monthly_price(region, "Linux", "x86", pods_number, average_duration_in_mins, vcpu_number, memory_number_in_gb, storage_number_in_gb=20)
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["ALB"] = get_alb_monthly_price(region, "LoadBalancing:Application", "LCUUsage", 0.8) + get_alb_monthly_price(region, "LoadBalancing:Application", "LoadBalancerUsage", None)
     prices["Client_VPN"] = get_client_vpn_connection_monthly_price(region, 

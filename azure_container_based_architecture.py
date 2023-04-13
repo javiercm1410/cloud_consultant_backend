@@ -5,23 +5,23 @@ from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
 from pricing.azure.get_db_mysql_monthly_price import get_mysql_database_price
 import json
 import base64
-# import os
+import os
 
 def azure_container_based_architecture(workload, region, working_dir):
     prices = {}
     if workload == "Low":
          pods_number = 1
-         average_duration_in_hours = 1
+         average_duration_in_hours = 730
          vcpu_number = 1
          memory_number_in_gb = 2
     elif workload == "Medium":
          pods_number = 2
-         average_duration_in_hours = 2
+         average_duration_in_hours = 730
          vcpu_number = 2
          memory_number_in_gb = 4
     else:
          pods_number = 4
-         average_duration_in_hours = 4
+         average_duration_in_hours = 730
          vcpu_number = 2
          memory_number_in_gb = 8
          
@@ -35,7 +35,7 @@ def azure_container_based_architecture(workload, region, working_dir):
                                                               compute_sku="Basic", 
                                                               storage=5)
     
-    # Read the image file as binary data
+    # # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:
         image_data = image_file.read()
 

@@ -20,7 +20,7 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         if architecture_type == "Classic-three-tier" and database_type == "SQL":
             output = azure_classic_three_tier_sql(workload, auto_scale, region, working_dir)
         elif architecture_type == "Container-based" and database_type == "SQL":
-            output = azure_container_based_architecture(workload, auto_scale, region, working_dir)
+            output = azure_container_based_architecture(workload, region, working_dir)
         else:
             output = json.dumps({"result": "None"})
     else:
@@ -42,4 +42,4 @@ if __name__ == "__main__":
     # Convert the output to JSON and print it
     print(output)
     
-# cloud_design_and_prices("AWS", "High", "Classic-three-tier", True, "SQL", "US_East")
+# print(cloud_design_and_prices("Azure", "High", "Container-based", False, "SQL", "US_East"))
