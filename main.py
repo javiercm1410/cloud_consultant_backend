@@ -5,7 +5,7 @@ from azure_container_based_architecture import azure_container_based_architectur
 from os_path import get_current_dir
 import json 
 
-def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region="US_East"):
+def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region):
     FUNCTION_MAP = {
         ("AWS", "Classic-three-tier", "MySQL"): aws_classic_three_tier_sql,
         ("AWS", "Container-based", "MySQL"): aws_container_three_tier_sql,

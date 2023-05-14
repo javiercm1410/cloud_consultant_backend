@@ -9,7 +9,7 @@ import base64
 
 def azure_classic_three_tier_sql(workload, auto_scale, region, working_dir):
     prices = {}
-    
+        
     diagram_path = azure_classic_three_tier_sql_diagram(auto_scale, working_dir)
     if workload == "Low":
         vm_type = "A1 v2" # 1 vCPU, 2GB RAM
