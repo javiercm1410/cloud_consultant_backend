@@ -5,7 +5,7 @@ from azure_container_based_architecture import azure_container_based_architectur
 from os_path import get_current_dir
 import json 
 
-def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region):
+def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region="US_East"):
     FUNCTION_MAP = {
         ("AWS", "Classic-three-tier", "MySQL"): aws_classic_three_tier_sql,
         ("AWS", "Container-based", "MySQL"): aws_container_three_tier_sql,
@@ -13,7 +13,10 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         ("Azure", "Container-based", "MySQL"): azure_container_based_architecture,
     }
     working_dir = get_current_dir()
-    region = "US East (N. Virginia)" if region == "US_East" else region
+    if region == "US_East" and cloud_provider_preference == "AWS":
+            region = "US East (N. Virginia)"
+    elif region == "US_East" and cloud_provider_preference == "Azure":
+        region = "eastus"
     function = FUNCTION_MAP.get((cloud_provider_preference, architecture_type, database_type))
     #Cambiar else para que retorne todos los precios 
     output = function(workload, auto_scale, region, working_dir) if function else json.dumps({"result": "None"})
