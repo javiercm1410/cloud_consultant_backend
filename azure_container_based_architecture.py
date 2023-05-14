@@ -7,8 +7,12 @@ import json
 import base64
 import os
 
-def azure_container_based_architecture(workload, region, working_dir):
+def azure_container_based_architecture(workload, auto_scale, region, working_dir):
     prices = {}
+    pods_number = 4
+    average_duration_in_hours = 730
+    vcpu_number = 2
+    memory_number_in_gb = 8
     if workload == "Low":
          pods_number = 1
          average_duration_in_hours = 730
@@ -19,11 +23,8 @@ def azure_container_based_architecture(workload, region, working_dir):
          average_duration_in_hours = 730
          vcpu_number = 2
          memory_number_in_gb = 4
-    else:
-         pods_number = 4
-         average_duration_in_hours = 730
-         vcpu_number = 2
-         memory_number_in_gb = 8
+    
+         
          
     diagram_path = azure_container_based_architecture_diagram(working_dir)
     prices["Azure_Container_Instances"] = get_aci_monthly_price(region, pods_number, average_duration_in_hours, vcpu_number, memory_number_in_gb)

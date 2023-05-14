@@ -8,7 +8,7 @@ import json
 import base64
 
 
-def aws_container_three_tier_sql(workload, region, working_dir):
+def aws_container_three_tier_sql(workload, auto_scale, region, working_dir):
 # def get_fargate_monthly_price(region, operating_system, architecture, pods_number, average_duration_in_mins, vcpu_number, memory_number_in_gb, storage_number_in_gb):
 
     prices = {}
@@ -19,12 +19,12 @@ def aws_container_three_tier_sql(workload, region, working_dir):
          memory_number_in_gb = 2
     elif workload == "Medium":
          pods_number = 2
-         average_duration_in_hours = 3000
+         average_duration_in_mins = 3000
          vcpu_number = 2
          memory_number_in_gb = 4
     else:
          pods_number = 4
-         average_duration_in_hours = 3000
+         average_duration_in_mins = 3000
          vcpu_number = 2
          memory_number_in_gb = 8
     diagram_path = aws_container_based_architecture_diagram(working_dir)

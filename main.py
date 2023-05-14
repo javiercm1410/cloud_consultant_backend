@@ -6,26 +6,19 @@ from os_path import get_current_dir
 import json 
 
 def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, region="US_East"):
+    FUNCTION_MAP = {
+        ("AWS", "Classic-three-tier", "MySQL"): aws_classic_three_tier_sql,
+        ("AWS", "Container-based", "MySQL"): aws_container_three_tier_sql,
+        ("Azure", "Classic-three-tier", "MySQL"): azure_classic_three_tier_sql,
+        ("Azure", "Container-based", "MySQL"): azure_container_based_architecture,
+    }
     working_dir = get_current_dir()
-    if region == "US_East" and cloud_provider_preference == "AWS":
-        region = "US East (N. Virginia)"
-        if architecture_type == "Classic-three-tier" and database_type == "SQL":
-            output = aws_classic_three_tier_sql(workload, auto_scale, region, working_dir)
-        elif architecture_type == "Container-based" and database_type == "SQL":
-            output = aws_container_three_tier_sql(workload, region, working_dir)
-        else:
-            output = json.dumps({"result": "None"})
-    elif region == "US_East" and cloud_provider_preference == "Azure":
-        region = "eastus"
-        if architecture_type == "Classic-three-tier" and database_type == "SQL":
-            output = azure_classic_three_tier_sql(workload, auto_scale, region, working_dir)
-        elif architecture_type == "Container-based" and database_type == "SQL":
-            output = azure_container_based_architecture(workload, region, working_dir)
-        else:
-            output = json.dumps({"result": "None"})
-    else:
-        output = json.dumps({"result": "None"})
+    region = "US East (N. Virginia)" if region == "US_East" else region
+    function = FUNCTION_MAP.get((cloud_provider_preference, architecture_type, database_type))
+    #Cambiar else para que retorne todos los precios 
+    output = function(workload, auto_scale, region, working_dir) if function else json.dumps({"result": "None"})
     return output
+
 if __name__ == "__main__":
     import sys
 
