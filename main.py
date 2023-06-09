@@ -2,6 +2,7 @@ from aws_classic_three_tier_sql import aws_classic_three_tier_sql
 from azure_classic_three_tier_sql import azure_classic_three_tier_sql
 from aws_container_based_architecture import aws_container_three_tier_sql
 from azure_container_based_architecture import azure_container_based_architecture
+from gcp_classic_three_tier_sql import gcp_classic_three_tier_sql
 from os_path import get_current_dir
 import json 
 
@@ -15,6 +16,7 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         ("AWS", "Container-based", "MySQL"): aws_container_three_tier_sql,
         ("Azure", "Classic-three-tier", "MySQL"): azure_classic_three_tier_sql,
         ("Azure", "Container-based", "MySQL"): azure_container_based_architecture,
+        ("GCP", "Classic-three-tier", "MySQL"): gcp_classic_three_tier_sql,
     }
     regions_map = {
         ("US_East", "AWS"): "US East (N. Virginia)",
@@ -48,20 +50,20 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
     #Estructura de output cuando se llama una funcion:
     # output = {"imageBase64" : base64_image, "data": {"Service_n" : price_n}}
 
-# if __name__ == "__main__":
-#     import sys
+if __name__ == "__main__":
+    import sys
 
-#     # Read the arguments from the command line
-#     cloud_provider_preference = sys.argv[1]
-#     workload = sys.argv[2]
-#     architecture_type = sys.argv[3]
-#     auto_scale = sys.argv[4].lower() == "true"
-#     database_type = sys.argv[5]
+    # Read the arguments from the command line
+    cloud_provider_preference = sys.argv[1]
+    workload = sys.argv[2]
+    architecture_type = sys.argv[3]
+    auto_scale = sys.argv[4].lower() == "true"
+    database_type = sys.argv[5]
 
-#     # Call the cloud_design_and_prices function with the given arguments
-#     output = cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type)
+    # Call the cloud_design_and_prices function with the given arguments
+    output = cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type)
 
-#     # Convert the output to JSON and print it
-#     print(output)
+    # Convert the output to JSON and print it
+    print(output)
     
-print(cloud_design_and_prices("No", "High", "Classic-three-tier", False, "MySQL"))
+# print(cloud_design_and_prices("No", "High", "Classic-three-tier", False, "MySQL"))
