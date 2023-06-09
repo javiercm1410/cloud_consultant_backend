@@ -11,7 +11,7 @@ def gcp_classic_three_tier_sql_diagram(auto_scale, working_dir):
     if auto_scale:
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
-        with Diagram(web_app_name, show=False):
+        with Diagram(web_app_name, filename, show=False):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("Virtual Network"):
@@ -28,7 +28,7 @@ def gcp_classic_three_tier_sql_diagram(auto_scale, working_dir):
     else:
         web_app_name = web_app_name + " (With Auto Scaling)"
         filename = output_path + web_app_name.lower().replace(" ", "_")
-        with Diagram(web_app_name, show=False):
+        with Diagram(web_app_name, filename, show=False):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("Virtual Network"):
