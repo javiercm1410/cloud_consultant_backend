@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-topologyResponse.js
+api/topologyResponse.js

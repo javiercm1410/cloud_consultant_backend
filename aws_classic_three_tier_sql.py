@@ -34,32 +34,32 @@ def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
                                                            deploymentOption='Single-AZ', 
                                                            storage=5)
 
-    terraform_config = {
-        "provider": {
-            "aws": {
-                "region": "<region>"
-            }
-        },
-        "resource": {
-            "aws_instance": {
-                "ec2_instance": {
-                    "ami": "<ami>",
-                    "instance_type": instance_type
-                }
-            },
-            "aws_alb": {
-                "alb": {
-                    "name": "my-alb"
-                }
-            },
-            "aws_db_instance": {
-                "default": {
-                    "engine": "mysql",
-                    "instance_class": "db.t2.micro"
-                }
-            }
-        }
-    }
+    # terraform_config = {
+    #     "provider": {
+    #         "aws": {
+    #             "region": "<region>"
+    #         }
+    #     },
+    #     "resource": {
+    #         "aws_instance": {
+    #             "ec2_instance": {
+    #                 "ami": "<ami>",
+    #                 "instance_type": instance_type
+    #             }
+    #         },
+    #         "aws_alb": {
+    #             "alb": {
+    #                 "name": "my-alb"
+    #             }
+    #         },
+    #         "aws_db_instance": {
+    #             "default": {
+    #                 "engine": "mysql",
+    #                 "instance_class": "db.t2.micro"
+    #             }
+    #         }
+    #     }
+    # }
 
     # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:
@@ -71,7 +71,7 @@ def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
     output = {
         "imageBase64": base64_image,
         "data": prices,
-        "terraformConfig": json.dumps(terraform_config, indent=2)
+        # "terraformConfig": json.dumps(terraform_config, indent=2)
     }
 
     return json.dumps(output, ensure_ascii=False)
