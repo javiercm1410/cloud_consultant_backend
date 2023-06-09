@@ -21,6 +21,7 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
     regions_map = {
         ("US_East", "AWS"): "US East (N. Virginia)",
         ("US_East", "Azure"): "eastus",
+        ("US_East", "GCP"): "us-east1"
     }
     cloud_providers = ["AWS", "Azure", "GCP"]
     
@@ -42,10 +43,11 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
             if function and region:
                 tmp_output = json.loads(function(workload, auto_scale, region, working_dir))
                 output[cloud_provider] = round(sum(tmp_output["data"].values()), 2)
+        output = json.dumps(output)
     else:
         output = {"result": "None"}
         
-    return json.dumps(output)
+    return output
 
     #Estructura de output cuando se llama una funcion:
     # output = {"imageBase64" : base64_image, "data": {"Service_n" : price_n}}
