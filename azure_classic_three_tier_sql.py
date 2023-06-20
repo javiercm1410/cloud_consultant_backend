@@ -40,7 +40,7 @@ def azure_classic_three_tier_sql(workload, auto_scale, region, working_dir):
         "data": prices,
     }
 
-    return json.dumps(output, ensure_ascii=False)
+    return output
     # return prices, diagram_path
 
 

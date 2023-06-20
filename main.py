@@ -6,7 +6,6 @@ from gcp_classic_three_tier_sql import gcp_classic_three_tier_sql
 from os_path import get_current_dir
 import json 
 
-# def get_classic_three_tier_sql_prices(function):
     
     
 def cloud_design_and_prices(cloud_provider_preference, workload, architecture_type, auto_scale, database_type, general_region="US_East"):
@@ -24,30 +23,29 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         ("US_East", "GCP"): "us-east1"
     }
     cloud_providers = ["AWS", "Azure", "GCP"]
-    
-    #Se busca la tupla en el diccionario y se retorna la funcion correspondiente 
-    function = function_map.get((cloud_provider_preference, architecture_type, database_type))
-    #Se busca la tupla en el diccionario y se retorna la region correspondiente
-    region = regions_map.get((general_region, cloud_provider_preference))
-    
-    working_dir = get_current_dir()
-    
+
     output = {}
-    if function and region: 
-        output = function(workload, auto_scale, region, working_dir) 
+
+    # Buscar la tupla en el diccionario y retornar la función correspondiente
+    function = function_map.get((cloud_provider_preference, architecture_type, database_type))
+    # Buscar la tupla en el diccionario y retornar la región correspondiente
+    region = regions_map.get((general_region, cloud_provider_preference))
+
+    working_dir = get_current_dir()
+    if function and region:
+        output = function(workload, auto_scale, region, working_dir)
     
-    elif cloud_provider_preference == "No":
-        for cloud_provider in cloud_providers:
-            function = function_map.get((cloud_provider, architecture_type, database_type))
-            region = regions_map.get((general_region, cloud_provider))
-            if function and region:
-                tmp_output = json.loads(function(workload, auto_scale, region, working_dir))
-                output[cloud_provider] = round(sum(tmp_output["data"].values()), 2)
-        output = json.dumps(output)
-    else:
-        output = {"result": "None"}
-        
-    return output
+    output.setdefault("Price", {})  # Asegurarse de que la clave 'Price' exista en 'output'
+
+    for cloud_provider in cloud_providers:
+        function = function_map.get((cloud_provider, architecture_type, database_type))
+        region = regions_map.get((general_region, cloud_provider))
+        if function and region:
+            tmp_output = function(workload, auto_scale, region, working_dir)
+            output["Price"].setdefault(cloud_provider, round(sum(tmp_output["data"].values()), 2))
+
+    return json.dumps(output, ensure_ascii=False)
+
 
     #Estructura de output cuando se llama una funcion:
     # output = {"imageBase64" : base64_image, "data": {"Service_n" : price_n}}
@@ -67,5 +65,4 @@ if __name__ == "__main__":
 
     # Convert the output to JSON and print it
     print(output)
-    
-# print(cloud_design_and_prices("No", "High", "Classic-three-tier", False, "MySQL"))
+# cloud_design_and_prices("No", "High", "Classic-three-tier", False, "MySQL")

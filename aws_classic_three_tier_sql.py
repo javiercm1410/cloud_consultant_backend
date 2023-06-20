@@ -74,7 +74,7 @@ def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
         # "terraformConfig": json.dumps(terraform_config, indent=2)
     }
 
-    return json.dumps(output, ensure_ascii=False)
+    return output
     # return prices, diagram_path
     # return prices, diagram_path
 
