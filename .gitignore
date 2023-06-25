@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 
 api/topologyResponse.js
+backend
+images
+api/backend
+diagram_as_code/aws/__pycache__
+diagram_as_code/azure/__pycache__
+diagram_as_code/gcp/__pycache__
+pricing/aws/__pycache__
+pricing/azure/__pycache__
+pricing/gcp/__pycache__
+__pycache__ 
