@@ -3,6 +3,7 @@ from azure_classic_three_tier_sql import azure_classic_three_tier_sql
 from aws_container_based_architecture import aws_container_three_tier_sql
 from azure_container_based_architecture import azure_container_based_architecture
 from gcp_classic_three_tier_sql import gcp_classic_three_tier_sql
+from gcp_container_based_architecture import gcp_container_three_tier_sql
 from os_path import get_current_dir
 import json 
 
@@ -16,6 +17,7 @@ def cloud_design_and_prices(cloud_provider_preference, workload, architecture_ty
         ("Azure", "Classic-three-tier", "MySQL"): azure_classic_three_tier_sql,
         ("Azure", "Container-based", "MySQL"): azure_container_based_architecture,
         ("GCP", "Classic-three-tier", "MySQL"): gcp_classic_three_tier_sql,
+        ("GCP", "Container-based", "MySQL"): gcp_container_three_tier_sql
     }
     regions_map = {
         ("US_East", "AWS"): "US East (N. Virginia)",

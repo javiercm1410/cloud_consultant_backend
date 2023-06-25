@@ -2,7 +2,7 @@ from diagram_as_code.azure.three_tier_classic_azure import azure_classic_three_t
 from pricing.azure.get_vm_monthly_price import get_vm_monthly_price
 from pricing.azure.get_managed_disk_monthly_price import get_managed_disk_monthly_price
 from pricing.azure.get_app_gw_monthly_price import get_app_gw_monthly_price
-from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
+# from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
 from pricing.azure.get_db_mysql_monthly_price import get_mysql_database_price
 import json
 import base64
@@ -21,7 +21,7 @@ def azure_classic_three_tier_sql(workload, auto_scale, region, working_dir):
     prices["Managed_disk"] = get_managed_disk_monthly_price(region, "Standard SSD", "E4 LRS") #E4 32GB
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["App_Gateway"] = get_app_gw_monthly_price(region, "Standard v2", 5)
-    prices["VPN_Gateway"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
+    # prices["VPN_Gateway"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
     prices["Azure_Database_MySQL"] = get_mysql_database_price(region, 
                                                               deployment_option="Flexible Server", 
                                                               tier="Burstable", 

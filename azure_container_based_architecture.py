@@ -1,7 +1,7 @@
 from diagram_as_code.azure.container_based_architecture_azure import azure_container_based_architecture_diagram
 from pricing.azure.get_aci_monthly_price import get_aci_monthly_price
 from pricing.azure.get_app_gw_monthly_price import get_app_gw_monthly_price
-from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
+# from pricing.azure.get_vpn_gw_monthly_price import get_vpn_gw_monthly_price
 from pricing.azure.get_db_mysql_monthly_price import get_mysql_database_price
 import json
 import base64
@@ -29,7 +29,7 @@ def azure_container_based_architecture(workload, auto_scale, region, working_dir
     diagram_path = azure_container_based_architecture_diagram(working_dir)
     prices["Azure_Container_Instances"] = get_aci_monthly_price(region, pods_number, average_duration_in_hours, vcpu_number, memory_number_in_gb)
     prices["App_Gateway"] = get_app_gw_monthly_price(region, "Standard v2", 5)
-    prices["VPN_Gateway"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
+    # prices["VPN_Gateway"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
     prices["Azure_Database_MySQL"] = get_mysql_database_price(region, 
                                                               deployment_option="Flexible Server", 
                                                               tier="Burstable", 
