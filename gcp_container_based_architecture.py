@@ -11,12 +11,12 @@ def gcp_container_three_tier_sql(workload, auto_scale, region, working_dir):
 
     prices = {}
     diagram_path = gcp_container_architecture(auto_scale, working_dir)
-    if workload == "low":
+    if workload == "Low":
         request_per_month = 144000
         number_of_instances = 1
         cpu = 2
         ram = 2
-    elif workload == "medium":
+    elif workload == "Medium":
         request_per_month = 1440000
         number_of_instances = 2
         cpu = 4

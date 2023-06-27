@@ -9,9 +9,9 @@ def gcp_classic_three_tier_sql(workload, auto_scale, region, working_dir):
     prices = {}
     
     diagram_path = gcp_classic_three_tier_sql_diagram(auto_scale, working_dir)
-    if workload == "low":
+    if workload == "Low":
         instance_type = "e2-small"
-    elif workload == "medium":
+    elif workload == "Medium":
         instance_type = "e2-medium"
     else:
         instance_type = "e2-standard-2"
