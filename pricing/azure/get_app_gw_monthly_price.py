@@ -32,18 +32,3 @@ def get_app_gw_monthly_price(region, tier, capacity_units):
         
         return round(total_cost_per_month, 2)
             
-        # else:
-        #     print("No se encontraron precios para la combinación de región, tier, tamaño y datos procesados especificados.")
-    
-    # except requests.exceptions.RequestException as e:
-    #     print(f"Error en la solicitud: {e}")
-    # except json.JSONDecodeError as e:
-    #     print(f"Error al decodificar la respuesta JSON: {e}")
-    # except Exception as e:
-    #     print(f"Error inesperado: {e}")
-
-# Ejemplo de uso
-## region = "eastus"
-# tier = "Standard v2"
-# capacity_units = 5
-# print(get_app_gw_monthly_price(region, tier, capacity_units))

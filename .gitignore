@@ -34,3 +34,10 @@ pricing/aws/__pycache__
 pricing/azure/__pycache__
 pricing/gcp/__pycache__
 __pycache__ 
+
+
+#Terraform file and provider
+.terraform*
+*.tfstate
+*tfvars
+*.backup
