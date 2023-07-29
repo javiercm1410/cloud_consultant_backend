@@ -30,17 +30,17 @@ variable "db_master_password" {
   sensitive   = true
 }
 
-variable "web_tier_user_data" {
-  type        = string
-  default     = ""
-  description = "Web Tier User Data"
-}
+# variable "web_tier_user_data" {
+#   type        = string
+#   default     = ""
+#   description = "Web Tier User Data"
+# }
 
-variable "app_tier_user_data" {
-  type        = string
-  default     = ""
-  description = "App Tier User Data"
-}
+# variable "app_tier_user_data" {
+#   type        = string
+#   default     = ""
+#   description = "App Tier User Data"
+# }
 
 variable "app_alb_port" {
   type        = number
@@ -379,7 +379,7 @@ resource "aws_launch_template" "ec2-web-tier" {
     security_groups       = ["${aws_security_group.cc-web-sg.id}"]
   }
 
-  user_data = base64encode(var.web_tier_user_data)
+  user_data = "${base64encode(file("web_user_data.sh"))}"
 }
 
 resource "aws_autoscaling_group" "ec2-web-tier-asg" {
@@ -448,7 +448,7 @@ resource "aws_launch_template" "ec2-app-tier" {
     security_groups       = ["${aws_security_group.cc-app-sg.id}"]
   }
 
-  user_data = base64encode(var.app_tier_user_data) 
+  user_data = "${base64encode(file("app_user_data.sh"))}"
 }
 
 resource "aws_autoscaling_group" "ec2-app-tier-asg" {

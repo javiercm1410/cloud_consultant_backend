@@ -3,7 +3,6 @@ import requests
 import json
 
 def get_managed_disk_monthly_price(region, tier, disk_size):
-    #try:
     api_url = "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview"
     query = f"armRegionName eq '{region}' and serviceName eq 'Storage' and contains(productName, '{tier}') and skuName eq '{disk_size}'"
     response = requests.get(api_url, params={'$filter': query})
@@ -19,18 +18,4 @@ def get_managed_disk_monthly_price(region, tier, disk_size):
     if disk_cost_item:
         return round(disk_cost_item, 2)
         
-    # else:
-    #     print("No se encontraron precios para la combinación de región, tier y disk size especificados.")
-    
-    # except requests.exceptions.RequestException as e:
-    #     print(f"Error en la solicitud: {e}")
-    # except json.JSONDecodeError as e:
-    #     print(f"Error al decodificar la respuesta JSON: {e}")
-    # except Exception as e:
-    #     print(f"Error inesperado: {e}")
 
-# Ejemplo de uso
-## region = "eastus"
-# tier = "Standard SSD"
-# disk_size = "E4 LRS"
-# print(get_managed_disk_monthly_price(region, tier, disk_size))
