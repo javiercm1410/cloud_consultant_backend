@@ -19,47 +19,20 @@ def aws_classic_three_tier_sql(workload, auto_scale, region, working_dir):
         instance_type = "t2.medium" # 2 vCPU, 4GB RAM
     else:
         instance_type = "t2.large" #2 vCPU, 8GB RAM
-    prices["EC2"] = get_ec2_monthly_price(region, instance_type)
-    prices["EBS"] = get_ebs_monthly_price(region, "gp2", 20)
+    prices["EC2"] = get_ec2_monthly_price(region, instance_type)*2
+    prices["EBS"] = get_ebs_monthly_price(region, "gp2", 20)*2
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
-    prices["ALB"] = get_alb_monthly_price(region, "LoadBalancing:Application", "LCUUsage", 0.8) + get_alb_monthly_price(region, "LoadBalancing:Application", "LoadBalancerUsage", None)
+    prices["ALB"] = (get_alb_monthly_price(region, "LoadBalancing:Application", "LCUUsage", 0.8) + get_alb_monthly_price(region, "LoadBalancing:Application", "LoadBalancerUsage", None))*2
     # prices["Client_VPN"] = get_client_vpn_connection_monthly_price(region, 
     #                                                                     connections=1, 
     #                                                                     hoursPerDay=8, 
     #                                                                     workingDays=22) + get_client_vpn_endpoint_monthly_price(region, 
     #                                                                                                                             subnetAssociations=2)
     prices["RDS_MySQL"] = get_rds_mysql_monthly_price(region, 
-                                                           instanceType='db.t3.micro', 
+                                                           instanceType="db.t3.small", 
                                                            databaseEngine='MySQL',
                                                            deploymentOption='Single-AZ', 
-                                                           storage=10)
-
-    # terraform_config = {
-    #     "provider": {
-    #         "aws": {
-    #             "region": "<region>"
-    #         }
-    #     },
-    #     "resource": {
-    #         "aws_instance": {
-    #             "ec2_instance": {
-    #                 "ami": "<ami>",
-    #                 "instance_type": instance_type
-    #             }
-    #         },
-    #         "aws_alb": {
-    #             "alb": {
-    #                 "name": "my-alb"
-    #             }
-    #         },
-    #         "aws_db_instance": {
-    #             "default": {
-    #                 "engine": "mysql",
-    #                 "instance_class": "db.t2.micro"
-    #             }
-    #         }
-    #     }
-    # }
+                                                           storage=100)*2
 
     # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:

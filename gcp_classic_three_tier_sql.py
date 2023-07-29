@@ -16,9 +16,9 @@ def gcp_classic_three_tier_sql(workload, auto_scale, region, working_dir):
     else:
         instance_type = "e2-standard-2"
         
-    prices["Compute_Engine"] = get_compute_engine_price(instance_type, region)
-    prices["Load_Balancing"] = get_load_balancing_price(2, region)
-    prices["Cloud_SQL"] = get_cloud_sql_price("db-standard-1", 10, region)
+    prices["Compute_Engine"] = get_compute_engine_price(instance_type, region)*2
+    prices["Load_Balancing"] = get_load_balancing_price(2, region)*2
+    prices["Cloud_SQL"] = get_cloud_sql_price("db-standard-1", 10, region)*2
     
     # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:

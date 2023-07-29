@@ -28,7 +28,7 @@ def gcp_container_three_tier_sql(workload, auto_scale, region, working_dir):
         ram = 8
 
     prices["Cloud_Run"] = get_cloud_run_prices(request_per_month, number_of_instances, cpu, ram, region)
-    prices["Load_Balancing"] = get_load_balancing_price(2, region)
+    # prices["Load_Balancing"] = get_load_balancing_price(2, region)
     prices["Cloud_SQL"] = get_cloud_sql_price("db-standard-1", 10, region)
 
     # Read the image file as binary data
