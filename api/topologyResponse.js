@@ -14,6 +14,7 @@ function generateTopologyResponse(answers) {
 
     pythonProcess.stderr.on('data', (data) => {
       console.error(`stderr: ${data}`);
+      reject(`Python script error: ${data}`);
     });
 
     pythonProcess.on('close', (code) => {
