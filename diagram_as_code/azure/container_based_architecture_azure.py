@@ -12,15 +12,14 @@ def azure_container_based_architecture_diagram(working_dir):
     with Diagram(web_app_name, filename, show=False):
         clients = Users("Clients")
         internet = Internet("Internet")
-        with Cluster("Public"):
+        with Cluster("Region"):
             ALBFI = ApplicationGateway("ALB")
-            with Cluster ("Private Subnet"):
-                with Cluster ("Container Cluster"):
-                    ACI_group = [ContainerInstances("Container"), 
-                                ContainerInstances("Container"), 
-                                ContainerInstances("Container")]
-                with Cluster("Database Tier"):
-                        DB_group = ManagedDatabases("Managed SQL Database")
+            with Cluster ("Container Cluster"):
+                ACI_group = [ContainerInstances("Container"), 
+                            ContainerInstances("Container"), 
+                            ContainerInstances("Container")]
+            with Cluster("Database Tier"):
+                    DB_group = ManagedDatabases("Managed SQL Database")
 
                         # DB_group = Dynamodb("Amazon Aurora")
         clients >> internet >> ALBFI >> ACI_group >> DB_group

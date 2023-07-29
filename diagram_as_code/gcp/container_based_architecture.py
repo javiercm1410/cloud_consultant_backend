@@ -14,8 +14,8 @@ def gcp_container_architecture(auto_scale, working_dir):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("Google Cloud Platform"):
-                LB = LoadBalancing("Load Balancer")
                 with Cluster("Cloud Run Services"):
+                    LB = LoadBalancing("Load Balancer")
                     services = [Run("Service 1"), Run("Service 2"), Run("Service 3")]
                 LB >> services
                 DB = SQL("Cloud SQL (MySQL)")
@@ -29,8 +29,8 @@ def gcp_container_architecture(auto_scale, working_dir):
             clients = Users("Clients")
             internet = Internet("Internet")
             with Cluster("Google Cloud Platform"):
-                LB = LoadBalancing("Load Balancer")
                 with Cluster("Cloud Run Services"):
+                    LB = LoadBalancing("Load Balancer")
                     services = [Run("Service 1"), Run("Service 2"), Run("Service 3")]
                 LB >> services
                 DB = SQL("Cloud SQL (MySQL)")

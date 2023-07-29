@@ -14,15 +14,14 @@ def aws_container_based_architecture_diagram(working_dir):
     with Diagram(web_app_name, filename, show=False):
         clients = Users("Clients")
         internet = Internet("Internet")
-        with Cluster("Public"):
+        with Cluster("Region"):
             ALBFI = ALB("ALB")
-            with Cluster ("Private Subnet"):
-                with Cluster ("Container Cluster"):
-                    Fargate_group = [Fargate("Container"), 
-                                Fargate("Container"), 
-                                Fargate("Container")]
-                with Cluster("Database Tier"):
-                        DB_group = RDS("RDS")
+            with Cluster ("Container Cluster"):
+                Fargate_group = [Fargate("Container"), 
+                            Fargate("Container"), 
+                            Fargate("Container")]
+            with Cluster("Database Tier"):
+                    DB_group = RDS("RDS")
 
                         # DB_group = Dynamodb("Amazon Aurora")
         clients >> internet >> ALBFI >> Fargate_group >> DB_group
