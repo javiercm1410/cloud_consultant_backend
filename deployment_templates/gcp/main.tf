@@ -12,7 +12,7 @@ provider "google-beta" {
 // Define the Cloud Run service
 
 resource "google_cloud_run_service" "default" {
-  name     = "wordpress"
+  name     = var.image
   location = var.region
   depends_on = [
     google_sql_database_instance.default,
@@ -24,47 +24,27 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "wordpress:latest"
+        image = var.image
 
         ports {
-          container_port = 80
+          container_port = var.image_port
         }
-        # env {
-        #   name  = "url"
-        #   value = "http://localhost:2368"
-        # }
-        # env {
-        #   name  = "database__client"
-        #   value = "sqlite3"
-        # }
-        # env {
-        #   name  = "database__connection__filename"
-        #   value = "/var/lib/ghost/content/data/ghost.db"
-        # }
-        # env {
-        #   name  = "database__client"
-        #   value = "mysql"
-        # }
         env {
-          name  = "WORDPRESS_DB_HOST"
+          name  = var.env_db_host
           value = "${google_sql_database_instance.default.ip_address[0].ip_address}"
         }
         env {
-          name  = "WORDPRESS_DB_USER"
+          name  = var.env_db_user
           value = "${google_sql_user.default.name}"
         }
         env {
-          name  = "WORDPRESS_DB_PASSWORD"
+          name  = var.env_db_password
           value = "${google_sql_user.default.password}"
         }
         env {
-          name  = "WORDPRESS_DB_NAME"
+          name  = var.env_db_name
           value = "${google_sql_database.default.name}"
         }
-        # env {
-        #   name  = "database__connection__port"
-        #   value = "3306"
-        # }
       }
     }
   }
@@ -89,9 +69,9 @@ resource "google_cloud_run_service_iam_binding" "public" {
 
 // Define the Cloud SQL instance
 resource "google_sql_database_instance" "default" {
-  name             = "admin-db"
+  name             = var.db_name
   region           = var.region
-  database_version = "MYSQL_5_7"
+  database_version = var.db_version
   deletion_protection = false
   depends_on = [
     google_project_service.sqladmin
@@ -111,7 +91,7 @@ resource "google_sql_database_instance" "default" {
 }
 
 resource "google_sql_user" "default" {
-  name     = "admin-user"
+  name     = var.db_user
   instance = google_sql_database_instance.default.name
   password = var.db_password
   depends_on = [
@@ -121,7 +101,7 @@ resource "google_sql_user" "default" {
 
 // Define the Cloud SQL database
 resource "google_sql_database" "default" {
-  name       = "admin-db"
+  name       = var.db_name
   instance   = google_sql_database_instance.default.name
   project    = var.project
   charset    = "utf8"
