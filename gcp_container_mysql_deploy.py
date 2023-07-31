@@ -1,6 +1,13 @@
 from python_terraform import *
 import json
 
+def pretty_print_outputs(outputs):
+    pretty_output = "Successful Deployment\n\n"
+    for key, value in outputs.items():
+        if not value['sensitive']:
+            pretty_output += f"{key}: {value['value']}\n"
+    return pretty_output
+
 def aws_three_tier_mysql_deploy(abs_path, 
                                 credentials,
                                 db_password,
@@ -35,10 +42,11 @@ def aws_three_tier_mysql_deploy(abs_path,
     
     tf.init()
     return_code, stdout, stderr = tf.apply(skip_plan=True)
-    stdout2 = tf.output
-    if return_code == 0 : return "Successful Deployment" + f"\n{stdout2}"
+    outputs = tf.output()
+    ppoutputs = pretty_print_outputs(outputs)
+    if return_code == 0 : return "Successful Deployment" + f"\n{ppoutputs}"
     else : return "Deployment Failed" + f"\n{stderr}"
-    
+
     
 if __name__ == "__main__":
     import sys
