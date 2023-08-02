@@ -562,6 +562,7 @@ resource "aws_db_instance" "cc-rds-mysql" {
   publicly_accessible    = false
   skip_final_snapshot    = true
   multi_az               = true
+  depends_on = [ aws_db_subnet_group.cc-rds-mysql-sn-group ]
 }
 
 

@@ -45,7 +45,7 @@ def aws_three_tier_mysql_deploy(abs_path,
     return_code, stdout, stderr = tf.apply(skip_plan=True)
     outputs = tf.output()
     ppoutputs = pretty_print_outputs(outputs)
-    if return_code == 0 : return "Successful Deployment" + f"\n{ppoutputs}"
+    if return_code == 0 : return f"\n{ppoutputs}"
     else : return "Deployment Failed" + f"\n{stderr}"
     
     

@@ -44,7 +44,7 @@ def aws_three_tier_mysql_deploy(abs_path,
     return_code, stdout, stderr = tf.apply(skip_plan=True)
     outputs = tf.output()
     ppoutputs = pretty_print_outputs(outputs)
-    if return_code == 0 : return "Successful Deployment" + f"\n{ppoutputs}"
+    if return_code == 0 : return f"\n{ppoutputs}"
     else : return "Deployment Failed" + f"\n{stderr}"
 
     
@@ -64,10 +64,10 @@ if __name__ == "__main__":
 
     db_version = "MYSQL_" + db_version.replace('.', '_')
     environments_array = environments.split(",")
-    env_db_host = "WORDPRESS_DB_HOST"
-    env_db_name = "WORDPRESS_DB_NAME"
-    env_db_password = "WORDPRESS_DB_PASSWORD"
-    env_db_user = "WORDPRESS_DB_USER"
+    env_db_host = environments_array[0]
+    env_db_name = environments_array[1]
+    env_db_password = environments_array[2]
+    env_db_user = environments_array[3]
 
 
     # Call the cloud_design_and_prices function with the given arguments

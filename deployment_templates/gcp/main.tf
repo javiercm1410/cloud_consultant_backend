@@ -73,12 +73,19 @@ resource "google_sql_database_instance" "default" {
   region           = var.region
   database_version = var.db_version
   deletion_protection = false
+
   depends_on = [
     google_project_service.sqladmin
   ]
 
   settings {
     tier = "db-f1-micro"
+    availability_type    = "REGIONAL" // Enable high availability
+
+    backup_configuration {
+      enabled            = true
+      binary_log_enabled = true // Required for MySQL
+    }
 
     ip_configuration {
       ipv4_enabled = true
