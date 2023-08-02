@@ -23,7 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+
+deployment_templates/gcp/variables.tf
+gcp_container_mysql_deploy.py
 api/topologyResponse.js
+deployResponse.js
 backend
 images
 api/backend
