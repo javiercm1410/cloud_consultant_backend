@@ -40,7 +40,7 @@ def aws_container_three_tier_sql(workload, auto_scale, region, working_dir):
                                                            instanceType='db.t3.micro', 
                                                            databaseEngine='MySQL',
                                                            deploymentOption='Single-AZ', 
-                                                           storage=5)
+                                                           storage=10)*2
 
     # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:

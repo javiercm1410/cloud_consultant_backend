@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 
 function generateTopologyResponse(answers) {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python3', [
+    const pythonProcess = spawn('python', [
       '../main.py', answers.cloud_provider, answers.workload, answers.architecture, answers.scale, answers.managed_database, ""
     ]);
 

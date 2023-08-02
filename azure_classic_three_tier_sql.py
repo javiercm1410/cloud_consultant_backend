@@ -17,8 +17,7 @@ def azure_classic_three_tier_sql(workload, auto_scale, region, working_dir):
         vm_type = "A2 v2" # 2 vCPU, 4GB RAM
     else:
         vm_type = "D2s v3" #2 vCPU, 8GB RAM
-    prices["VM"] = get_vm_monthly_price(region, vm_type)*2
-    prices["Managed_disk"] = get_managed_disk_monthly_price(region, "Standard SSD", "E4 LRS")*2 #E4 32GB
+    prices["VM"] = get_vm_monthly_price(region, vm_type)*2 + get_managed_disk_monthly_price(region, "Standard SSD", "E4 LRS")*2 
     # There are two ELB usage type that we can request: LoadBalancerUsage and LCUUsage (LoadBalancerUnits)
     prices["App_Gateway"] = get_app_gw_monthly_price(region, "Standard v2", 5)*2
     # prices["VPN_Gateway"] = get_vpn_gw_monthly_price(region, "VpnGw1") 
@@ -26,7 +25,7 @@ def azure_classic_three_tier_sql(workload, auto_scale, region, working_dir):
                                                               deployment_option="Flexible Server", 
                                                               tier="Burstable", 
                                                               compute_sku="Basic", 
-                                                              storage=5)*2
+                                                              storage=10)*2
     
     # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:

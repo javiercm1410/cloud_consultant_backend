@@ -34,7 +34,7 @@ def azure_container_based_architecture(workload, auto_scale, region, working_dir
                                                               deployment_option="Flexible Server", 
                                                               tier="Burstable", 
                                                               compute_sku="Basic", 
-                                                              storage=5)
+                                                              storage=10) *2 
     
     # # Read the image file as binary data
     with open(diagram_path, "rb") as image_file:
