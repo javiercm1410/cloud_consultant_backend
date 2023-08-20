@@ -22,13 +22,13 @@ def aws_three_tier_mysql_deploy(abs_path,
                                 image_port):
 
 
-    with open ("C:\\Users\\fredd\\OneDrive\\Escritorio\\cloudconsultant-fc0ed56f2037.json", 'w') as file:
+    with open ("/Users/simon/.google/credentials/cloudconsultant-fc0ed56f2037.json", 'w') as file:
         file.write(credentials)
     
     # db_version = "MYSQL_" + db_version.replace('.', '_')
         
     tf = Terraform(working_dir=abs_path, variables={
-        "credentials_path": "C:\\Users\\fredd\\OneDrive\\Escritorio\\cloudconsultant-fc0ed56f2037.json",
+        "credentials_path": "/Users/simon/.google/credentials/cloudconsultant-fc0ed56f2037.json",
         "db_password": db_password,
         "db_name": db_name,
         "db_user": db_user,

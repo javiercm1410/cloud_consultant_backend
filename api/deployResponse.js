@@ -6,17 +6,17 @@ function generateTopologyResponse(answers) {
     let pythonProcess;
 
     if (answers.cloud_provider === 'GCP' && answers.architecture === 'Container-based') {
-      pythonProcess = spawn('python', [
-        "../gcp_container_mysql_deploy.py",
-        "C:\\Users\\fredd\\OneDrive\\Escritorio\\CloudProject\\backend\\deployment_templates\\gcp\\",
+      pythonProcess = spawn('python3', [
+        "/Users/simon/codes/CloudProject/backend/gcp_container_mysql_deploy.py",
+        "/Users/simon/codes/CloudProject/backend/deployment_templates/gcp",
         answers.access_key, answers.database_password, answers.database_name,
         answers.database_version, answers.env_database, answers.container_repository,
         answers.container_port
       ]);
     } else if (answers.cloud_provider === 'AWS' && answers.architecture === 'Classic-three-tier') {
       pythonProcess = spawn('python3', [
-        "../aws_three_tier_mysql_deploy.py",
-        "C:\\Users\\fredd\\OneDrive\\Escritorio\\CloudProject\\backend\\deployment_templates\\aws\\three-tier-arch-mysql\\",
+        "/Users/simon/codes/CloudProject/backend/aws_three_tier_mysql_deploy.py",
+        "/Users/simon/codes/CloudProject/backend/deployment_templates/aws/three-tier-arch-mysql",
         answers.access_key, answers.database_name, answers.database_password,
         answers.deploy_command_front, answers.deploy_command_back, answers.backend_port,
         answers.workload

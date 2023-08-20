@@ -13,7 +13,7 @@ variable "region" {
 variable "credentials_path" {
   description = "credential for gcp"
   type        = string
-  default  = "C:\\Users\\fredd\\OneDrive\\Escritorio\\cloudconsultant-fc0ed56f2037.json"
+  default  = "/Users/simon/.google/credentials/cloudconsultant-fc0ed56f2037.json"
 }
 
 variable "db_password" {
